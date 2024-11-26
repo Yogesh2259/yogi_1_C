@@ -1,0 +1,8 @@
+#include<stdio.h>
+int main() {
+for(int I =1<=10;I++) {
+if(==5) {
+continue;
+}
+printf("%d\n";i) ;
+}
