@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+vold swap(int a, int b) {
+
+int tempa;
+
+* a =*b;
+
+*b= temp;
+
+}
+
+int main() {
+
+int a = 10 b = 70
+
+printf("Before swap: ad, b =ad1n^ prime prime a, b )
+
+swap(&a, &b);
+
+printf("After swap: a = vd b=ad backslash n ^ 2 , a, b);
+
+return 0;
+
+}
