@@ -1,0 +1,21 @@
+#include<stdio.h>
+struct Address{
+    char city[50];
+    int pin;
+};
+struct person{
+    char name[50];
+    struct Address addr;
+};
+int main() {
+    struct person p ;
+    printf("enter name:");
+    scanf("%s",p.name);
+    printf("enterentercity:");
+    scanf("%s",p.addr.city);
+    printf("enter pin:");
+    scanf("%d",&p.addr.pin);
+    printf("\nperson Detailed:\n");
+    printf("Name: %s\nCity: %s\nPin: %d\n", p.name, p.addr.city, p.addr.pin);
+return 0;
+}
