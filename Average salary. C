@@ -1,54 +1,24 @@
 #include <stdio.h>
-#define MAX_EMPLOYEES 100
 struct Employee {
     char name[50];
-    int id;
-    float salary;
+    double salary;
 };
-float calculateAverage(struct Employee employees[], int count) {
-    float totalSalary = 0.0;
-    for (int i = 0; i < count; i++) {
-        totalSalary += employees[i].salary;
-    }
-    return totalSalary / count;
-}
 int main() {
-    struct Employee group1[MAX_EMPLOYEES], group2[MAX_EMPLOYEES];
-    int count1, count2;
-    printf("Enter the number of employees in Group 1: ");
-    scanf("%d", &count1);
-    printf("Enter details for Group 1 employees:\n");
-    for (int i = 0; i < count1; i++) {
-        printf("Employee %d\n", i + 1);
-        printf("Name: ");
-        scanf("%s", group1[i].name);
-        printf("ID: ");
-        scanf("%d", &group1[i].id);
-        printf("Salary: ");
-        scanf("%f", &group1[i].salary);
+    int n, i;
+    double totalSalary = 0, averageSalary;
+    printf("Enter the number of employees: ");
+    scanf("%d", &n);
+    struct Employee employees[n];
+    for (i = 0; i < n; i++) {
+        printf("Enter name of employee %d: ", i + 1);
+        scanf("%s", employees[i].name);
+        printf("Enter salary of %s: ", employees[i].name);
+        scanf("%lf", &employees[i].salary);
+        totalSalary += employees[i].salary; // Add to total salary
     }
-    printf("\nEnter the number of employees in Group 2: ");
-    scanf("%d", &count2);
-    printf("Enter details for Group 2 employees:\n");
-    for (int i = 0; i < count2; i++) {
-        printf("Employee %d\n", i + 1);
-        printf("Name: ");
-        scanf("%s", group2[i].name);
-        printf("ID: ");
-        scanf("%d", &group2[i].id);
-        printf("Salary: ");
-        scanf("%f", &group2[i].salary);
-    }
-    float avg1 = calculateAverage(group1, count1);
-    float avg2 = calculateAverage(group2, count2);
-    printf("\nAverage salary of Group 1: %.2f\n", avg1);
-    printf("Average salary of Group 2: %.2f\n", avg2);
-    if (avg1 > avg2) {
-        printf("Group 1 has a higher average salary.\n");
-    } else if (avg1 < avg2) {
-        printf("Group 2 has a higher average salary.\n");
-    } else {
-        printf("Both groups have the same average salary.\n");
-    }
+    averageSalary = totalSalary / n;
+    printf("\nThe average salary of employees is: %.2lf\n", averageSalary);
+
     return 0;
 }
+
