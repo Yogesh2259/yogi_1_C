@@ -1,0 +1,15 @@
+#include <stdio.h>
+
+int main() {
+    int arr[3] = {5, 10, 15};
+    int *p = arr;
+
+    printf("Initial pointer value: %d\n", *p);
+    p++; // Move to the next element
+    printf("Pointer after increment: %d\n", *p);
+
+    p--; // Move back to the first element
+    printf("Pointer after decrement: %d\n", *p);
+
+    return 0;
+}
