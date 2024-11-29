@@ -1,0 +1,19 @@
+#include <stdio.h>
+struct Book {
+    char name[30]; 
+    int num;
+    float price;
+};
+int main() {
+    struct Book b1; 
+    printf("Enter Book name: ");
+    scanf("%s", b1.name);
+    printf("Enter Book number: ");
+    scanf("%d", &b1.num);
+    printf("Enter Book price: ");
+    scanf("%f", &b1.price);
+    printf("\nBook Details:\n");
+    printf("Name: %s\n", b1.name);
+    printf("Number: %d\n", b1.num);
+    printf("Price: %.2f\n", b1.price);
+    return 0;
