@@ -17,3 +17,4 @@ int main() {
     printf("Number: %d\n", b1.num);
     printf("Price: %.2f\n", b1.price);
     return 0;
+}
