@@ -1,0 +1,14 @@
+#include <stdio.h>
+
+int main() {
+    int x = 10;
+    int *p = &x;
+
+    printf("Value of x: %d\n", x);
+    printf("Value using pointer: %d\n", *p);
+
+    *p = 20; // Modify x using pointer
+    printf("Modified value of x: %d\n", x);
+
+    return 0;
+}
