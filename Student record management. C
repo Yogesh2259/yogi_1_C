@@ -1,0 +1,158 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_STUDENTS 100
+
+// Structure to store student information
+struct Student {
+    int roll_number;
+    char name[50];
+    float marks;
+};
+
+// Function declarations
+void addRecord(struct Student students[], int *studentCount);
+void viewRecord(struct Student students[], int studentCount);
+void editRecord(struct Student students[], int studentCount);
+void deleteRecord(struct Student students[], int *studentCount);
+void displayAllRecords(struct Student students[], int studentCount);
+
+int main() {
+    struct Student students[MAX_STUDENTS];
+    int studentCount = 0;  // Tracks the number of students
+    int choice;
+
+    while (1) {
+        printf("\nStudent Record Management System\n");
+        printf("1. Add Record\n");
+        printf("2. View Record\n");
+        printf("3. Edit Record\n");
+        printf("4. Delete Record\n");
+        printf("5. View All Records\n");
+        printf("6. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addRecord(students, &studentCount);
+                break;
+            case 2:
+                viewRecord(students, studentCount);
+                break;
+            case 3:
+                editRecord(students, studentCount);
+                break;
+            case 4:
+                deleteRecord(students, &studentCount);
+                break;
+            case 5:
+                displayAllRecords(students, studentCount);
+                break;
+            case 6:
+                printf("Exiting the system.\n");
+                return 0;
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+}
+
+void addRecord(struct Student students[], int *studentCount) {
+    if (*studentCount >= MAX_STUDENTS) {
+        printf("Student records are full. Cannot add more students.\n");
+        return;
+    }
+
+    struct Student newStudent;
+    printf("Enter roll number: ");
+    scanf("%d", &newStudent.roll_number);
+    getchar();  // To consume newline character after entering roll number
+    printf("Enter student name: ");
+    fgets(newStudent.name, 50, stdin);
+    newStudent.name[strcspn(newStudent.name, "\n")] = '\0';  // Remove newline character from name
+    printf("Enter student marks: ");
+    scanf("%f", &newStudent.marks);
+
+    students[*studentCount] = newStudent;
+    (*studentCount)++;
+    printf("Student added successfully.\n");
+}
+
+void viewRecord(struct Student students[], int studentCount) {
+    int roll_number;
+    printf("Enter roll number to view: ");
+    scanf("%d", &roll_number);
+
+    for (int i = 0; i < studentCount; i++) {
+        if (students[i].roll_number == roll_number) {
+            printf("\nRoll Number: %d\n", students[i].roll_number);
+            printf("Name: %s\n", students[i].name);
+            printf("Marks: %.2f\n", students[i].marks);
+            return;
+        }
+    }
+    printf("Record not found.\n");
+}
+
+void editRecord(struct Student students[], int studentCount) {
+    int roll_number;
+    printf("Enter roll number to edit: ");
+    scanf("%d", &roll_number);
+
+    for (int i = 0; i < studentCount; i++) {
+        if (students[i].roll_number == roll_number) {
+            printf("Enter new name (leave blank to keep unchanged): ");
+            getchar();  // Consume newline
+            char newName[50];
+            fgets(newName, 50, stdin);
+            newName[strcspn(newName, "\n")] = '\0';  // Remove newline
+
+            if (strlen(newName) > 0) {
+                strcpy(students[i].name, newName);
+            }
+
+            printf("Enter new marks (leave blank to keep unchanged): ");
+            char newMarks[10];
+            fgets(newMarks, 10, stdin);
+            if (strlen(newMarks) > 1) {
+                students[i].marks = atof(newMarks);
+            }
+
+            printf("Record updated successfully.\n");
+            return;
+        }
+    }
+    printf("Record not found.\n");
+}
+
+void deleteRecord(struct Student students[], int *studentCount) {
+    int roll_number;
+    printf("Enter roll number to delete: ");
+    scanf("%d", &roll_number);
+
+    for (int i = 0; i < *studentCount; i++) {
+        if (students[i].roll_number == roll_number) {
+            for (int j = i; j < *studentCount - 1; j++) {
+                students[j] = students[j + 1];  // Shift records to delete the student
+            }
+            (*studentCount)--;
+            printf("Record deleted successfully.\n");
+            return;
+        }
+    }
+    printf("Record not found.\n");
+}
+
+void displayAllRecords(struct Student students[], int studentCount) {
+    if (studentCount == 0) {
+        printf("No records found.\n");
+        return;
+    }
+
+    for (int i = 0; i < studentCount; i++) {
+        printf("\nRoll Number: %d\n", students[i].roll_number);
+        printf("Name: %s\n", students[i].name);
+        printf("Marks: %.2f\n", students[i].marks);
+    }
+}
