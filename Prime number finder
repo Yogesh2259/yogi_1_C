@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+// Function to check if a number is prime
+bool isPrime(int num) {
+    if (num <= 1) {
+        return false;  // Numbers less than or equal to 1 are not prime
+    }
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) {
+            return false;  // If divisible by any number, it's not prime
+        }
+    }
+    return true;
+}
+
+// Function to find and save prime numbers to a file
+void findPrimesAndSaveToFile(int start, int end) {
+    FILE *file = fopen("prime_numbers.txt", "w");  // Open file to write primes
+    if (file == NULL) {
+        printf("Error opening file.\n");
+        return;
+    }
+
+    // Check all numbers in the given range and write primes to the file
+    for (int i = start; i <= end; i++) {
+        if (isPrime(i)) {
+            fprintf(file, "%d\n", i);  // Write prime number to the file
+        }
+    }
+
+    fclose(file);  // Close the file after writing
+    printf("Prime numbers in the range [%d, %d] have been saved to 'prime_numbers.txt'.\n", start, end);
+}
+
+int main() {
+    int start, end;
+
+    // Get range from user
+    printf("Enter the start of the range: ");
+    scanf("%d", &start);
+    printf("Enter the end of the range: ");
+    scanf("%d", &end);
+
+    // Find and save primes to file
+    findPrimesAndSaveToFile(start, end);
+
+    return 0;
+}
